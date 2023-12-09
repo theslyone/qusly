@@ -8,6 +8,7 @@ export interface IOptions {
 
 export interface ISftpOptions {
   tryKeyboard?: boolean;
+  privateKey?: Buffer | string;
 }
 
 export interface IFtpOptions {

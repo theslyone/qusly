@@ -48,11 +48,11 @@ export class SftpClient extends EventEmitter {
           if (err) return reject(err);
 
           this._wrapper = sftp;
-          resolve();
+          resolve(true);
         });
       });
 
-      this._ssh.connect({ username: config.user, ...config });
+      this._ssh.connect({ username: config.user, ...config, privateKey: options.privateKey });
     });
   }
 
@@ -61,7 +61,7 @@ export class SftpClient extends EventEmitter {
       this.socket.addListener('close', () => {
         this._wrapper = null;
         this._ssh = null;
-        resolve();
+        resolve(true);
       });
 
       this._ssh.end();
@@ -104,7 +104,7 @@ export class SftpClient extends EventEmitter {
     return new Promise((resolve, reject) => {
       this._wrapper.rename(src, dest, err => {
         if (err) return reject(err);
-        resolve();
+        resolve(true);
       });
     });
   }
@@ -113,7 +113,7 @@ export class SftpClient extends EventEmitter {
     return new Promise((resolve, reject) => {
       this._wrapper.unlink(path, err => {
         if (err) return reject(err);
-        resolve();
+        resolve(true);
       });
     });
   }
@@ -140,7 +140,7 @@ export class SftpClient extends EventEmitter {
     return new Promise((resolve, reject) => {
       this._wrapper.rmdir(path, err => {
         if (err) return reject(err);
-        resolve();
+        resolve(true);
       });
     });
   }
@@ -149,7 +149,7 @@ export class SftpClient extends EventEmitter {
     return new Promise((resolve, reject) => {
       this._wrapper.mkdir(path, err => {
         if (err) return reject(err);
-        resolve();
+        resolve(true);
       });
     });
   }
@@ -196,7 +196,7 @@ export class SftpClient extends EventEmitter {
 
         this._wrapper.close(handle, err => {
           if (err) return reject(err);
-          resolve();
+          resolve(true);
         });
       });
     });
@@ -219,7 +219,7 @@ export class SftpClient extends EventEmitter {
 
       source.once('close', () => {
         this._client.removeListener('disconnected', resolve);
-        resolve();
+        resolve(true);
       });
 
       source.pipe(dest);
@@ -243,7 +243,7 @@ export class SftpClient extends EventEmitter {
 
       dest.once('close', () => {
         this._client.removeListener('disconnected', resolve);
-        resolve();
+        resolve(true);
       });
 
       source.pipe(dest);
