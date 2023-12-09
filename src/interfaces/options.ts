@@ -8,9 +8,12 @@ export interface IOptions {
 
 export interface ISftpOptions {
   tryKeyboard?: boolean;
+  privateKey?: Buffer | string;
 }
 
-export interface IFtpOptions {}
+export interface IFtpOptions {
+  timeout?: number;
+}
 
 export interface IFtpsOptions {
   secureOptions?: ConnectionOptions;
