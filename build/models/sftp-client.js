@@ -40,7 +40,13 @@ class SftpClient extends events_1.EventEmitter {
                     resolve(true);
                 });
             });
-            this._ssh.connect(Object.assign(Object.assign({ username: config.user }, config), { privateKey: options === null || options === void 0 ? void 0 : options.privateKey }));
+            this._ssh.connect({
+                username: config.user,
+                host: config.host,
+                port: config.port,
+                // ...config, 
+                privateKey: options === null || options === void 0 ? void 0 : options.privateKey
+            });
         });
     }
     disconnect() {
