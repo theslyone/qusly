@@ -1,7 +1,7 @@
 node_modules
 *.log
 *.log*
-build
+#build
 dist
 .vscode
 .vs
