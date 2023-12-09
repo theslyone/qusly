@@ -52,7 +52,7 @@ export class SftpClient extends EventEmitter {
         });
       });
 
-      this._ssh.connect({ username: config.user, ...config, privateKey: options.privateKey });
+      this._ssh.connect({ username: config.user, ...config, privateKey: options?.privateKey });
     });
   }
 
