@@ -54,10 +54,10 @@ export class SftpClient extends EventEmitter {
       });
 
       this._ssh.connect({ 
+        ...config,
         username: config.user, 
         host: config.host,
-        port: config.port,
-        // ...config, 
+        port: config.port,        
         privateKey: options?.privateKey ?? readFileSync(options?.privateKeyPath)
       });
     });

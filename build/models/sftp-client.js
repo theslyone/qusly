@@ -42,13 +42,7 @@ class SftpClient extends events_1.EventEmitter {
                     resolve(true);
                 });
             });
-            this._ssh.connect({
-                username: config.user,
-                host: config.host,
-                port: config.port,
-                // ...config, 
-                privateKey: (_a = options === null || options === void 0 ? void 0 : options.privateKey) !== null && _a !== void 0 ? _a : fs_1.readFileSync(options === null || options === void 0 ? void 0 : options.privateKeyPath)
-            });
+            this._ssh.connect(Object.assign(Object.assign({}, config), { username: config.user, host: config.host, port: config.port, privateKey: (_a = options === null || options === void 0 ? void 0 : options.privateKey) !== null && _a !== void 0 ? _a : fs_1.readFileSync(options === null || options === void 0 ? void 0 : options.privateKeyPath) }));
         });
     }
     disconnect() {
