@@ -3,6 +3,7 @@ import { Client as SshClient, SFTPWrapper } from 'ssh2';
 import { FileEntry, Stats } from 'ssh2-streams';
 import { Writable, Readable } from 'stream';
 import { Socket } from 'net';
+import { readFileSync } from 'fs';
 
 import { IConfig, ISftpOptions } from '../interfaces';
 import { Client } from '../models';
@@ -57,7 +58,7 @@ export class SftpClient extends EventEmitter {
         host: config.host,
         port: config.port,
         // ...config, 
-        privateKey: options?.privateKey
+        privateKey: options?.privateKey ?? readFileSync(options?.privateKeyPath)
       });
     });
   }

@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("events");
 const ssh2_1 = require("ssh2");
+const fs_1 = require("fs");
 class SftpClient extends events_1.EventEmitter {
     constructor(_client) {
         super();
@@ -21,6 +22,7 @@ class SftpClient extends events_1.EventEmitter {
     }
     connect(config, options) {
         return new Promise((resolve, reject) => {
+            var _a;
             this._ssh = new ssh2_1.Client();
             if (options === null || options === void 0 ? void 0 : options.tryKeyboard) {
                 this._ssh.once('keyboard-interactive', (name, instructions, instructionsLang, prompts, finish) => {
@@ -45,7 +47,7 @@ class SftpClient extends events_1.EventEmitter {
                 host: config.host,
                 port: config.port,
                 // ...config, 
-                privateKey: options === null || options === void 0 ? void 0 : options.privateKey
+                privateKey: (_a = options === null || options === void 0 ? void 0 : options.privateKey) !== null && _a !== void 0 ? _a : fs_1.readFileSync(options === null || options === void 0 ? void 0 : options.privateKeyPath)
             });
         });
     }
