@@ -26,8 +26,8 @@ export declare class SftpClient extends EventEmitter {
     mkdir(path: string): Promise<unknown>;
     pwd(): Promise<unknown>;
     readDir(path: string): Promise<FileEntry[]>;
-    createReadStream(path: string, start?: number): import("ssh2").ReadStream;
-    createWriteStream(path: string): import("ssh2").WriteStream;
+    createReadStream(path: string, start?: number): Readable;
+    createWriteStream(path: string): Writable;
     stat(path: string): Promise<Stats>;
     touch(path: string): Promise<unknown>;
     download(path: string, dest: Writable, startAt?: number): Promise<unknown>;
